@@ -8,6 +8,7 @@ import java.text.*;
 
 public class BankTester {
     public static void menu(){
+            System.out.println();
     }
     
     public static void main(String[] args){
