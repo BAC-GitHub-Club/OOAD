@@ -5,6 +5,10 @@
 import java.text.*;
 
 public class BankTester {
+	public static void menu() {
+		
+	}
+	
     public static void main(String[] args){
         double withdraw=200,deposit=1000,interestRate=12;
         String money,money_withdrawn,money_deposited; //for display and used for formatting
