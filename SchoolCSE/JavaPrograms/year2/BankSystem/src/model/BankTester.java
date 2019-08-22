@@ -8,7 +8,7 @@ import java.text.*;
 
 public class BankTester {
     public static void menu(){
-            System.out.println();
+            System.out.println("lol");
     }
     
     public static void main(String[] args){
