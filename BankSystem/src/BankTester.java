@@ -153,7 +153,8 @@ public class BankTester {
                     System.out.println("2 InterestBearing Cheque Account");
                     selection=input.nextInt();
                     if(selection==1){
-                        System.out.println("Enter account ");
+                        System.out.println("Enter account number :");
+                        selection=input.nextInt();
                     }else  if(selection==2){
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
