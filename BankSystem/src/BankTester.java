@@ -144,14 +144,29 @@ public class BankTester {
         boolean systemOn=true;
         int choice,selection,option;
         
-        while(systemOn){
+         int accnumber=-1;
+        String owner;
+        double balance=0;
+        accnumber++;
+        System.out.println("Please Enter your Firstname and Lastname :");
+        owner=input.nextLine();
+        Savings acc = new Savings(accnumber,owner,balance);
+        savingsAccs.add(acc);
+        System.out.println("Account successfully created!");
+        money=amountFormat.format(savingsAccs.get(accnumber).getBalance());
+        System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
+        acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
+       /* while(systemOn){
             choice=mainMenu();
-            if(choice==1) {
+            systemOn=false;
+            
+            switch (choice) {
+                case 1:
                     System.out.println("Select account to withdraw from:");
                     System.out.println("1 Cheque Account");
                     System.out.println("2 InterestBearing Cheque Account");
-                    selection=input.nextInt();
-                    if(selection==1){
+                    int s=input.nextInt();
+                    if(s==1){
                         System.out.println("Enter account number :");
                         option=input.nextInt();
                         if(option<=chequeAccs.size()){
@@ -159,7 +174,7 @@ public class BankTester {
                         }else{
                             System.out.println("Account does not exist");
                         }     
-                    }else  if(selection==2){
+                    }else  if(s==2){
                         System.out.println("Enter account number :");
                         option=input.nextInt();
                         if(option<=ibcAccs.size()){
@@ -170,7 +185,8 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-            }else if(choice==2){
+                    break;
+                case 2:
                     System.out.println("Select account to deposit to:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
@@ -203,7 +219,8 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-            }else if(choice==3){
+                    break;
+                case 3:
                     System.out.println("Select the type of account you wish to create:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
@@ -218,7 +235,10 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
+                    break;
+                default:
+                    break;
             }
-        }
+        }*/
     }
 }
