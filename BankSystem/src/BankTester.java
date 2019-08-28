@@ -142,7 +142,7 @@ public class BankTester {
         chequeAccs= new ArrayList<>();
         ibcAccs = new ArrayList<>();
         boolean systemOn=true;
-        int choice,selection;
+        int choice,selection,option;
         
         while(systemOn){
             choice=mainMenu();
@@ -154,15 +154,75 @@ public class BankTester {
                     selection=input.nextInt();
                     if(selection==1){
                         System.out.println("Enter account number :");
-                        selection=input.nextInt();
+                        option=input.nextInt();
+                        if(option<=chequeAccs.size()){
+                            withdraw(chequeAccs.get(option));
+                        }else{
+                            System.out.println("Account does not exist");
+                        }     
                     }else  if(selection==2){
+                        System.out.println("Enter account number :");
+                        option=input.nextInt();
+                        if(option<=ibcAccs.size()){
+                            withdraw(ibcAccs.get(option));
+                        }else{
+                            System.out.println("Account does not exist");
+                        }
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
                     break;
                 case 2:
+                    System.out.println("Select account to deposit to:");
+                    System.out.println("1 Savings Account"); 
+                    System.out.println("2 Cheque Account");
+                    System.out.println("3 InterestBearing Cheque Account");
+                    selection=input.nextInt();
+                    if(selection==1){
+                        System.out.println("Enter account number :");
+                        option=input.nextInt();
+                        if(option<=savingsAccs.size()){
+                            deposit(savingsAccs.get(option));
+                        }else{
+                            System.out.println("Account does not exist");
+                        }     
+                    }else if(selection==2){
+                        System.out.println("Enter account number :");
+                        option=input.nextInt();
+                        if(option<=chequeAccs.size()){
+                            deposit(chequeAccs.get(option));
+                        }else{
+                            System.out.println("Account does not exist");
+                        }     
+                    }else  if(selection==3){
+                        System.out.println("Enter account number :");
+                        option=input.nextInt();
+                        if(option<=ibcAccs.size()){
+                            deposit(ibcAccs.get(option));
+                        }else{
+                            System.out.println("Account does not exist");
+                        }
+                    }else{
+                        System.out.println("You have been taken back to the Main Menu");
+                    }
                     break;
                 case 3:
+                     System.out.println("Select the type of account you wish to create:");
+                    System.out.println("1 Savings Account"); 
+                    System.out.println("2 Cheque Account");
+                    System.out.println("3 InterestBearing Cheque Account");
+                    selection=input.nextInt();
+                    if(selection==1){
+                        savingsAccs=createSavingsAccount(savingsAccs);
+                    }else if(selection==2){
+                        chequeAccs=createChequeAccount(chequeAccs);
+                    }else  if(selection==3){
+                        ibcAccs=createInterestBearingChequeAccount(ibcAccs);
+                    }else{
+                        System.out.println("You have been taken back to the Main Menu");
+                    }
+                    
+                    
                     break;
                 default:
                     break;
