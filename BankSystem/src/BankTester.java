@@ -146,8 +146,7 @@ public class BankTester {
         
         while(systemOn){
             choice=mainMenu();
-            switch (choice) {
-                case 1:
+            if(choice==1) {
                     System.out.println("Select account to withdraw from:");
                     System.out.println("1 Cheque Account");
                     System.out.println("2 InterestBearing Cheque Account");
@@ -171,8 +170,7 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    break;
-                case 2:
+            }else if(choice==2){
                     System.out.println("Select account to deposit to:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
@@ -205,9 +203,8 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    break;
-                case 3:
-                     System.out.println("Select the type of account you wish to create:");
+            }else if(choice==3){
+                    System.out.println("Select the type of account you wish to create:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
                     System.out.println("3 InterestBearing Cheque Account");
@@ -221,11 +218,6 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    
-                    
-                    break;
-                default:
-                    break;
             }
         }
     }
