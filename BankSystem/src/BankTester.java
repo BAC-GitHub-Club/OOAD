@@ -3,56 +3,169 @@
  * @author Kesego
  */
 import java.text.*;
+import java.util.*;
 
 public class BankTester {
-	public static void menu() {
-		
-	}
-	
-    public static void main(String[] args){
-        double withdraw=200,deposit=1000,interestRate=12;
-        String money,money_withdrawn,money_deposited; //for display and used for formatting
-        
-        DecimalFormat amountFormat = new DecimalFormat("#.00");//gets two decimals
-        
-        //Test Savings Account
-        Savings firstSavingsAcc = new Savings(1011001,"Tshepho Ranyemo",5000);
-        money=amountFormat.format(firstSavingsAcc.getBalance());
-        System.out.println("Savings Account number: "+firstSavingsAcc.getAccountNumber()+"\tOwner:"+firstSavingsAcc.getOwner());
-        System.out.println("Initial Balance: "+money);
-        firstSavingsAcc.depositAmount(deposit);
-        firstSavingsAcc.payInterest(interestRate);
-        money_deposited=amountFormat.format(firstSavingsAcc.getBalance());
-        System.out.println("After deposit and interest: "+money_deposited);
-        
-        //Test ChequeAccount
-        ChequeAccount cheque1 = new ChequeAccount(1011001,"Robert Theo",2000);
-        System.out.println("\nCheque Account number: "+cheque1.getAccountNumber()+"\tOwner:"+cheque1.getOwner());
-        money=amountFormat.format(cheque1.getBalance());
-        System.out.println("Initial Balance: "+money);
-        cheque1.depositAmount(deposit);
-        money_deposited=amountFormat.format(cheque1.getBalance());
-        System.out.println("After deposit: "+money_deposited);
-        cheque1.withDrawal(withdraw);
-        money_withdrawn = amountFormat.format(withdraw);
-        money=amountFormat.format(cheque1.getBalance());
-        System.out.println ("After withDrawal of $" + money_withdrawn + ",  balance = $" + money);
-        
-        //Test InterestBearing Account
-        InterestBearingChequeAccount interestAcc1 = new InterestBearingChequeAccount(1012002,"Monei Joseph",2000);
-        System.out.println("\nCheque Account number: "+interestAcc1.getAccountNumber()+"\tOwner:"+interestAcc1.getOwner());
-        money=amountFormat.format(interestAcc1.getBalance());
-        System.out.println("Initial Balance: "+money);
-        interestAcc1.depositAmount(deposit);
-        money_deposited=amountFormat.format(interestAcc1.getBalance());
-        System.out.println("After deposit: "+money_deposited);
-        interestAcc1.withDrawal(withdraw);
-        interestAcc1.payInterest(interestRate);
-        money_withdrawn = amountFormat.format(withdraw);
-        money=amountFormat.format(interestAcc1.getBalance());
-        System.out.println ("After withDrawal of $" + money_withdrawn + ",  balance = $" + money);
-        
+
+    public static Scanner input = new Scanner(System.in); //for input
+    public static DecimalFormat amountFormat = new DecimalFormat("#.00");//gets two decimals
+    public static String money,money_withdrawn,money_deposited; //for display and used for formatting
+    public static final double RATE=12; //Interest rate in percentage 
+    
+    public static  int mainMenu(){  //main menu method
        
+        int option;
+        System.out.println("Select an option");
+        System.out.println("Select 1 to withdraw");
+        System.out.println("Select 2 to Deposit");
+        System.out.println("Select 3 to create an Account");
+        System.out.println("select 0 to Exit");
+        option =input.nextInt();
+        while(option<0 || option>3){
+            System.out.println("Invalid input");
+            System.out.println("Re-enter option :");
+            option =input.nextInt();
+        }
+        return option;
+    }
+    public static void withdraw(ChequeAccount acc){ //Cheque account withdrawal method
+        double amountWithdrawn;
+        System.out.println("\nCheque Account number: "+acc.getAccountNumber()+"\tOwner:"+acc.getOwner());
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("Initial Balance: "+money);
+        System.out.println("please Enter the amount you wish to withdraw");
+        amountWithdrawn=input.nextDouble();
+        acc.withDrawal(amountWithdrawn);
+        money_withdrawn = amountFormat.format(amountWithdrawn);
+        money=amountFormat.format(acc.getBalance());
+        System.out.println ("After withDrawal of $" + money_withdrawn + ",  balance = $" + money);
+    }
+    public static void withdraw(InterestBearingChequeAccount acc){  //interestBearingCheque account withdrawal method
+        double amountWithdrawn;
+        System.out.println("\nCheque Account number: "+acc.getAccountNumber()+"\tOwner:"+acc.getOwner());
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("Balance: "+money);
+        System.out.println("please Enter the amount you wish to withdraw");
+        amountWithdrawn=input.nextDouble();
+        acc.withDrawal(amountWithdrawn);
+        acc.payInterest(RATE);
+        money_withdrawn = amountFormat.format(amountWithdrawn);
+        money=amountFormat.format(acc.getBalance());
+        System.out.println ("After withDrawal of $" + money_withdrawn + ",  balance = $" + money);
+    }
+    public static void deposit(Savings acc){ //savings account deposit method
+        double deposit;
+        System.out.println("\nSavings Account number: "+acc.getAccountNumber()+"\tOwner:"+acc.getOwner());
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("Balance: "+money);
+        System.out.println("please Enter the amount you wish to Deposit");
+        deposit=input.nextDouble();
+        acc.depositAmount(deposit);
+        acc.payInterest(RATE);
+        money_deposited=amountFormat.format(acc.getBalance());
+        System.out.println("After deposit and interest: "+money_deposited);
+    }
+    public static void deposit(ChequeAccount acc){ //Cheque account deposit method
+        double deposit;
+        System.out.println("\nCheque Account number: "+acc.getAccountNumber()+"\tOwner:"+acc.getOwner());
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("Balance: "+money);
+        System.out.println("please Enter the amount you wish to Deposit");
+        deposit=input.nextDouble();
+        acc.depositAmount(deposit);
+        money_deposited=amountFormat.format(acc.getBalance());
+        System.out.println("After deposit : "+money_deposited);
+    }
+    public static void deposit(InterestBearingChequeAccount acc){ //interestBearingCheque account deposit method
+        double deposit;
+        System.out.println("\nInterestBearingCheque Account number: "+acc.getAccountNumber()+"\tOwner:"+acc.getOwner());
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("Balance: "+money);
+        System.out.println("please Enter the amount you wish to Deposit");
+        deposit=input.nextDouble();
+        acc.depositAmount(deposit);
+        acc.payInterest(RATE);
+        money_deposited=amountFormat.format(acc.getBalance());
+        System.out.println("After deposit and interest: "+money_deposited);
+    }
+    public static ArrayList <Savings> createSavingsAccount(ArrayList <Savings> accs){   //create savings account
+        int accnumber=-1;
+        String owner;
+        double balance=0;
+        accnumber++;
+        System.out.println("Please Enter your Firstname and Lastname :");
+        owner=input.nextLine();
+        Savings acc = new Savings(accnumber,owner,balance);
+        accs.add(acc);
+        System.out.println("Account successfully created!");
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
+        acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
+      return accs;  
+    }
+    public static ArrayList <ChequeAccount> createChequeAccount(ArrayList <ChequeAccount> accs){   //create Cheque account
+        int accnumber=-1;
+        String owner;
+        double balance=0;
+        accnumber++;
+        System.out.println("Please Enter your Firstname and Lastname :");
+        owner=input.nextLine();
+        ChequeAccount acc = new ChequeAccount(accnumber,owner,balance);
+        accs.add(acc);
+        System.out.println("Account successfully created!");
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
+        acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
+      return accs;  
+    }
+    public static ArrayList <InterestBearingChequeAccount> createInterestBearingChequeAccount(ArrayList <InterestBearingChequeAccount> accs){   //create InterestBearingCheque account
+        int accnumber=-1;
+        String owner;
+        double balance=0;
+        accnumber++;
+        System.out.println("Please Enter your Firstname and Lastname :");
+        owner=input.nextLine();
+        InterestBearingChequeAccount acc = new InterestBearingChequeAccount(accnumber,owner,balance);
+        accs.add(acc);
+        System.out.println("Account successfully created!");
+        money=amountFormat.format(acc.getBalance());
+        System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
+        acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
+      return accs;  
+    }
+    
+    public static void main(String[] args){ //Main method
+        ArrayList <Savings> savingsAccs;
+        ArrayList <ChequeAccount> chequeAccs;
+        ArrayList <InterestBearingChequeAccount> ibcAccs;
+        savingsAccs = new ArrayList<>();
+        chequeAccs= new ArrayList<>();
+        ibcAccs = new ArrayList<>();
+        boolean systemOn=true;
+        int choice,selection;
         
+        while(systemOn){
+            choice=mainMenu();
+            switch (choice) {
+                case 1:
+                    System.out.println("Select account to withdraw from:");
+                    System.out.println("1 Cheque Account");
+                    System.out.println("2 InterestBearing Cheque Account");
+                    selection=input.nextInt();
+                    if(selection==1){
+                        System.out.println("Enter account ");
+                    }else  if(selection==2){
+                    }else{
+                        System.out.println("You have been taken back to the Main Menu");
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
