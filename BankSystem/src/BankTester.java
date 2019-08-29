@@ -7,7 +7,7 @@ import java.util.*;
 
 public class BankTester {
 
-    public static Scanner input = new Scanner(System.in); //for input
+    public static  Scanner input = new Scanner(System.in); //for input
     public static DecimalFormat amountFormat = new DecimalFormat("#.00");//gets two decimals
     public static String money,money_withdrawn,money_deposited; //for display and used for formatting
     public static final double RATE=12; //Interest rate in percentage 
@@ -89,12 +89,11 @@ public class BankTester {
         System.out.println("After deposit and interest: "+money_deposited);
     }
     public static ArrayList <Savings> createSavingsAccount(ArrayList <Savings> accs){   //create savings account
-        int accnumber=-1;
+        int accnumber=(int)(Math.random()*((999999999-100000000)+1))+1000000000;
         String owner;
         double balance=0;
-        accnumber++;
         System.out.println("Please Enter your Firstname and Lastname :");
-        owner=input.nextLine();
+        owner=input.next();
         Savings acc = new Savings(accnumber,owner,balance);
         accs.add(acc);
         System.out.println("Account successfully created!");
@@ -104,12 +103,11 @@ public class BankTester {
       return accs;  
     }
     public static ArrayList <ChequeAccount> createChequeAccount(ArrayList <ChequeAccount> accs){   //create Cheque account
-        int accnumber=-1;
+        int accnumber=(int)(Math.random()*((999999999-100000000)+1))+1000000000;
         String owner;
         double balance=0;
-        accnumber++;
         System.out.println("Please Enter your Firstname and Lastname :");
-        owner=input.nextLine();
+        owner=input.next();
         ChequeAccount acc = new ChequeAccount(accnumber,owner,balance);
         accs.add(acc);
         System.out.println("Account successfully created!");
@@ -119,12 +117,12 @@ public class BankTester {
       return accs;  
     }
     public static ArrayList <InterestBearingChequeAccount> createInterestBearingChequeAccount(ArrayList <InterestBearingChequeAccount> accs){   //create InterestBearingCheque account
-        int accnumber=-1;
+        int accnumber=(int)(Math.random()*((999999999-100000000)+1))+1000000000;
         String owner;
         double balance=0;
-        accnumber++;
+        
         System.out.println("Please Enter your Firstname and Lastname :");
-        owner=input.nextLine();
+        owner=input.next();
         InterestBearingChequeAccount acc = new InterestBearingChequeAccount(accnumber,owner,balance);
         accs.add(acc);
         System.out.println("Account successfully created!");
@@ -135,6 +133,7 @@ public class BankTester {
     }
     
     public static void main(String[] args){ //Main method
+       
         ArrayList <Savings> savingsAccs;
         ArrayList <ChequeAccount> chequeAccs;
         ArrayList <InterestBearingChequeAccount> ibcAccs;
@@ -143,25 +142,33 @@ public class BankTester {
         ibcAccs = new ArrayList<>();
         boolean systemOn=true;
         int choice,selection,option;
-        
-         int accnumber=-1;
-        String owner;
-        double balance=0;
-        accnumber++;
-        System.out.println("Please Enter your Firstname and Lastname :");
-        owner=input.nextLine();
-        Savings acc = new Savings(accnumber,owner,balance);
-        savingsAccs.add(acc);
-        System.out.println("Account successfully created!");
-        money=amountFormat.format(savingsAccs.get(accnumber).getBalance());
-        System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
-        acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
-       /* while(systemOn){
+        /*System.out.println("Select the type of account you wish to create:");
+        System.out.println("1 Savings Account"); 
+        System.out.println("2 Cheque Account");
+        System.out.println("3 InterestBearing Cheque Account");
+        choice=input.nextInt();
+        if(1==choice){
+            int accnumber=-1;
+            String owner;
+            double balance=0;
+            accnumber++;
+            System.out.println("Please Enter your Firstname and Lastname :");
+            owner=input.next();
+            Savings acc = new Savings(accnumber,owner,balance);
+            savingsAccs.add(acc);
+            System.out.println("Account successfully created!");
+            money=amountFormat.format(acc.getBalance());
+            System.out.println("ACCOUNT DETAILS\n"+"Account Number :"+
+            acc.getAccountNumber()+"\nOwner :"+acc.getOwner()+"Initial Balance :"+money);
+        }else if(2==choice){
+            chequeAccs=createChequeAccount(chequeAccs);
+        }else{
+            ibcAccs= createInterestBearingChequeAccount(ibcAccs);
+        }*/
+       while(systemOn){
             choice=mainMenu();
-            systemOn=false;
             
-            switch (choice) {
-                case 1:
+            if(choice==1){
                     System.out.println("Select account to withdraw from:");
                     System.out.println("1 Cheque Account");
                     System.out.println("2 InterestBearing Cheque Account");
@@ -185,8 +192,7 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    break;
-                case 2:
+            }else if(choice==2){
                     System.out.println("Select account to deposit to:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
@@ -219,8 +225,7 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    break;
-                case 3:
+       }else if(choice==3){
                     System.out.println("Select the type of account you wish to create:");
                     System.out.println("1 Savings Account"); 
                     System.out.println("2 Cheque Account");
@@ -228,6 +233,9 @@ public class BankTester {
                     selection=input.nextInt();
                     if(selection==1){
                         savingsAccs=createSavingsAccount(savingsAccs);
+                        for(int i=0;i<savingsAccs.size();i++){
+                           System.out.println(savingsAccs.get(i).getAccountNumber());
+                        }
                     }else if(selection==2){
                         chequeAccs=createChequeAccount(chequeAccs);
                     }else  if(selection==3){
@@ -235,10 +243,9 @@ public class BankTester {
                     }else{
                         System.out.println("You have been taken back to the Main Menu");
                     }
-                    break;
-                default:
-                    break;
-            }
-        }*/
+       }else{
+           break;
+        }
+        }
     }
 }
