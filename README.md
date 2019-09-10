@@ -1,3 +1,3 @@
-# Banking_System
+# OOAD TUTORIALS
 
-Banking system tutorial exercise from school
+repo for OOAD tutorials
