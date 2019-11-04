@@ -21,6 +21,7 @@ preferrably `feature-you-are-working-on`
 `git commit -m 'commit message'`
 7. Push your changes
 `git push origin branch-name`
+preferably develop branch
 8. Create a new pull request from your forked repository (Click the New Pull Request button located at the top of your repo)
 9. Wait for your PR review and merge approval!
 10. Star this repository if you had fun!
