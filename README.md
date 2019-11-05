@@ -6,7 +6,7 @@
 
 ## How To Get Started
 1. Fork this repository
-`https://github.com/Kesego23/OOAD.git`
+`https://github.com/BAC-GitHub-Club/OOAD.git`
 2. Clone your fork down to your local machine
 `git clone hhttps://github.com/YOUR-NAME/OOAD.git`
 get into the directory
@@ -29,7 +29,6 @@ preferably develop branch
 
 * Text editor or IDE preferabbly NetBeans,Intellij or Eclipse
 
-Nothing 
 
 ## DBMS
 
